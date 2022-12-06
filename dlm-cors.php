@@ -19,18 +19,68 @@
 	along with this program.  If not, see <http://www.gnu.org/licenses/>.
 */
 
+/**
+ * Plugin main class.
+ */
 class DLM_CORS {
 
 	const VERSION = '1.0.0';
-    public $dlm_cors_request_url = '';
+	/**
+	 * Access Origin
+	 *
+	 * @var string
+	 */
+	public $dlm_cors_request_url = '';
 
+	/**
+	 * DLM's endpoint.
+	 *
+	 * @var string
+	 * @since 1.0.0
+	 */
+	public $endpoint = '';
+
+	/**
+	 * DLM's endpoint value.
+	 *
+	 * @var string
+	 * @since 1.0.0
+	 */
+	public $ep_value = '';
+
+	/**
+	 * Class constructor.
+	 *
+	 * @since 1.0.0
+	 */
 	public function __construct() {
 
-		$this->setup();
+		if ( is_admin() ) {
+			add_filter( 'dlm_settings', array( $this, 'requester_url_setting' ) );
+			add_action( 'admin_init', array( $this, 'check_dependencies' ) );
+		}
+
+		$endpoint = get_option( 'dlm_download_endpoint' );
+		$ep_value = get_option( 'dlm_download_endpoint_value' );
+
+		$this->endpoint = ( $endpoint ) ? $endpoint : 'download';
+		$this->ep_value = ( $ep_value ) ? $ep_value : 'ID';
+
+		$dlm_cors_request_url = get_option( 'dlm_cors_requester_url' );
+
+		if ( $dlm_cors_request_url && '' != $dlm_cors_request_url ) {
+
+			$this->dlm_cors_request_url = untrailingslashit( $dlm_cors_request_url );
+			add_filter( 'dlm_download_headers', array( $this, 'dlm_set_cors_policy' ) );
+			add_action( 'send_headers', array( $this, 'dlm_set_wp_cors_policy' ) );
+		}
+
 	}
 
 	/**
-	 * Check if Download Monitor is installed and up to date
+	 * Check if Download Monitor is installed
+	 *
+	 * @since 1.0.0
 	 */
 	public function check_dependencies() {
 		if ( class_exists( 'WP_DLM' ) ) {
@@ -41,67 +91,74 @@ class DLM_CORS {
 
 	/**
 	 * Add dependency notice
+	 *
+	 * @since 1.0.0
 	 */
 	public function dependency_notice() {
 		?>
 		<div class="error">
-			<p><?php _e( 'Download Monitor - DLM Cors requires Download Monitor to be active in order to work.', 'dlm-ninja-forms' ); ?></p>
+			<p><?php esc_html_e( 'Download Monitor - Cors requires Download Monitor to be active in order to work.', 'dlm-cors' ); ?></p>
 		</div>
 		<?php
 	}
 
 	/**
-	 * Setup the plugin
+	 * Add plugin's settings.
+	 *
+	 * @param array $settings DLM's settings.
+	 *
+	 * @return array
+	 * @since 1.0.0
 	 */
-	public function setup() {
+	public function requester_url_setting( $settings ) {
+		$settings['advanced']['sections']['access']['fields'][] = array(
+			'name'     => 'dlm_cors_requester_url',
+			'std'      => '',
+			'label'    => __( 'CORS Requester URL', 'dlm-cors' ),
+			'desc'     => __( 'Specify the requester URL so we can allow cross site download requests comming from the specified source. Add <code>*</code> in order to accept all. ', 'dlm-cors' ),
+			'type'     => 'text',
+			'priority' => 70
+		);
 
-        if( is_admin() ){
-            add_filter( 'dlm_settings', array( $this, 'requester_url_setting' ) );
-        }
-
-        $dlm_cors_request_url = get_option( 'dlm_cors_requester_url' );
-
-        if( $dlm_cors_request_url && '' != $dlm_cors_request_url ){
-            
-            $this->dlm_cors_request_url = untrailingslashit( $dlm_cors_request_url );
-            add_filter( 'dlm_download_headers', array( $this, 'dlm_set_cors_policy' ) );
-            add_action( 'send_headers', array( $this, 'dlm_set_wp_cors_policy' ) );
-        }
-
-
+		return $settings;
 	}
 
-    public function requester_url_setting( $settings ){
-        $settings['advanced']['sections']['misc']['fields'][] = array(
-            'name'     => 'dlm_cors_requester_url',
-            'std'      => '',
-            'label'    => __( 'CORS Requester URL', 'download-monitor' ),
-            'desc'     => __( 'Specify the requester URL so we can allow cross site download requests comming from the specified source.', 'download-monitor' ),
-            'type'     => 'text',
-            'priority' => 70
-       );
+	/**
+	 * Set our headers
+	 *
+	 * @param array $headers DLM's headers.
+	 *
+	 * @return array
+	 *
+	 * @since 1.0.0
+	 */
+	public function dlm_set_cors_policy( $headers ) {
 
-        return $settings;
-    }
- 
+		$headers['Access-Control-Allow-Origin']  = $this->dlm_cors_request_url;
+		$headers['Access-Control-Allow-Headers'] = 'dlm-xhr-request';
 
-    public function dlm_set_cors_policy( $headers ){
+		return $headers;
+	}
+	/**
+	 * Set our headers
+	 *
+	 * @return void
+	 *
+	 * @since 1.0.0
+	 */
+	public function dlm_set_wp_cors_policy() {
+		global $wp;
+		// If DLM not present then bounce. There is a possibility that the settings are here but the plugin is not active/installed.
+		if ( ! class_exists( 'WP_DLM' ) ) {
+			return;
+		}
 
-        $headers['Access-Control-Allow-Origin']  = $this->dlm_cors_request_url;
-        $headers['Access-Control-Allow-Headers'] = 'dlm-xhr-request';
-        
-        return $headers;
-    }
-    
-   
-    public function dlm_set_wp_cors_policy(){
-
-        header( 'Access-Control-Allow-Origin: ' . $this->dlm_cors_request_url );
-        header( 'Access-Control-Allow-Headers: dlm-xhr-request' );
-    }
-
-
+		// Only set the headers if it is a request for a download.
+		if ( ! empty( $wp->query_vars[ $this->endpoint ] ) && ( ( null === $wp->request ) || ( '' === $wp->request ) || ( strstr( $wp->request, $this->endpoint . '/' ) ) ) ) {
+			header( 'Access-Control-Allow-Origin: ' . $this->dlm_cors_request_url );
+			header( 'Access-Control-Allow-Headers: dlm-xhr-request' );
+		}
+	}
 }
-
 
 new DLM_CORS();
