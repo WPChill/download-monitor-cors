@@ -16,18 +16,8 @@ Download Monitor provides an interface for uploading and managing downloadable f
 
 = Features =
 
-* Add, edit and remove downloads from a familiar WP interface; Your downloads are just like posts.
-* Sell your downloads from within your WordPress website!
-* 100% Gutenberg compatible, including a new Download Monitor Download Block. Type /download to use it!
-* Quick-add panel for adding downloads / files whilst editing posts.
-* Add multiple file versions to your downloads each with their own data like download count and file links.
-* Define alternative links (mirrors) per download version.
-* Categorize, tag, or add other meta to your downloads.
-* Display download links on the frontend using shortcodes.
-* Change the way download links get displayed via template files.
-* Track downloads counts and log user download attempts.
-* Member only downloads, requires users to be logged in to download your files.
-* Customisable endpoints for showing pretty download links.
+* Adds the possibility for Download Monitor's XHR requests to be processed from other domains.
+
 
 Download Monitor has been featured on the websites of some of the most popular and leading businesses in the WordPress ecosystem, such as WPBeginner, Pagely, Jilt, WP Fusion & Kinsta.
 
@@ -61,13 +51,11 @@ More advanced topics that a lot of people find interesting:
 
 = Contributing and reporting bugs =
 
-You can contribute code to this plugin via GitHub: [https://github.com/WPChill/download-monitor](https://github.com/WPChill/download-monitor)
-
-You can contribute localizations via Transifex [https://www.transifex.com/projects/p/download-monitor/](https://www.transifex.com/projects/p/download-monitor/)
+You can contribute code to this plugin via GitHub: [https://github.com/WPChill/download-monitor](https://github.com/WPChill/dlm-cors)
 
 = Support =
 
-Use the WordPress.org forums for community support. If you spot a bug, you can of course log it on [Github](https://github.com/WPChill/download-monitor/issues/new/choose) instead where we can act upon it more efficiently.
+Use the WordPress.org forums for community support. If you spot a bug, you can of course log it on [Github](https://github.com/WPChill/dlm-cors/issues/new/choose) instead where we can act upon it more efficiently.
 
 == Installation ==
 
@@ -84,40 +72,6 @@ The manual installation method involves downloading the plugin and uploading it 
 * Download the plugin file to your computer and unzip it
 * Using an FTP program, or your hosting control panel, upload the unzipped plugin folder to your WordPress installation's `wp-content/plugins/` directory.
 * Activate the plugin from the Plugins menu within the WordPress admin.
-
-== Frequently Asked Questions ==
-
-= Can I upload .xxx filetype using the uploader? =
-
-Download Monitor uses the WordPress uploader for uploading files. By default these formats are supported:
-
-* Images - .jpg, .jpeg, .png, .gif
-* Documents - .pdf, .doc, .docx, .ppt, .pptx, .pps, .ppsx, .odt, .xls, .xlsx
-* Music - .mp3, .m4a, .ogg, .wav
-* Video - .mp4, .m4v, .mov, .wmv, .avi, .mpg, .ogv, .3gp, .3g2
-
-To add more you can use a plugin, or filters. This post is a good resource for doing it with filters: [Change WordPress Upload Mime Types](http://www.paulund.co.uk/change-wordpress-upload-mime-types).
-
-= Can I link to external downloads? =
-
-Yes, you can use both local paths and external URLs.
-
-= My Download links 404 =
-
-Download links are powered by endpoints. If you find them 404'ing, go to Settings > Permalinks and save. This will flush the permalinks and allow our endpoints to be added.
-
-= Download counts are not increasing when I download something =
-
-Admin hits are not counted, log out and try!
-
-More documentation can be found in our [Knowledge Base](https://www.download-monitor.com/kb/).
-
-== Screenshots ==
-
-1. Easily add downloads to your website with our Gutenberg block!
-2. The main admin screen lists your downloads using familiar WordPress UI.
-3. Easily add file information and multiple versions.
-4. The quick add panel can be opened via a link about the post editor. This lets you quickly add a file and insert it into a post.
 
 == Changelog ==
 
