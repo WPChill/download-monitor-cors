@@ -71,7 +71,7 @@ class DLM_CORS {
 		if ( $dlm_cors_request_url && '' != $dlm_cors_request_url ) {
 
 			$this->dlm_cors_request_url = untrailingslashit( $dlm_cors_request_url );
-			add_filter( 'dlm_download_headers', array( $this, 'dlm_set_cors_policy' ) );
+			add_filter( 'dlm_xhr_download_headers', array( $this, 'dlm_set_cors_policy' ) );
 			add_action( 'send_headers', array( $this, 'dlm_set_wp_cors_policy' ) );
 		}
 
