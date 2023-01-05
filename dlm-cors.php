@@ -3,7 +3,7 @@
 	Plugin Name: Download Monitor - CORS
 	Plugin URI: https://www.download-monitor.com/
 	Description: Allows cross site origin from the specified URL
-	Version: 1.0.0
+	Version: 1.0.1
 	Author: WPChill
 	Author URI: https://wpchill.com
 	License: GPL v2
@@ -24,7 +24,7 @@
  */
 class DLM_CORS {
 
-	const VERSION = '1.0.0';
+	const VERSION = '1.0.1';
 	/**
 	 * Access Origin
 	 *
