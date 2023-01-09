@@ -1,7 +1,7 @@
 {
   "name": "dlm-cors",
   "title": "Download Monitor - CORS",
-  "version": "1.0.0",
+  "version": "1.0.1",
   "homepage": "https://www.download-monitor.com/",
   "repository": {
     "type": "git",
