@@ -75,7 +75,7 @@ The manual installation method involves downloading the plugin and uploading it 
 
 == Changelog ==
 
-= 1.0.0 - 09.01.2022 =
+= 1.0.1 - 09.01.2023 =
 Changed: Default setting ( [#3](https://github.com/WPChill/dlm-cors/issues/3) )
 Changed: Text update ( [#2](https://github.com/WPChill/dlm-cors/issues/2) )
 
