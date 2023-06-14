@@ -3,7 +3,7 @@
 	Plugin Name: Download Monitor - CORS
 	Plugin URI: https://www.download-monitor.com/
 	Description: Allows cross site origin from the specified URL
-	Version: 1.0.0
+	Version: 1.0.1
 	Author: WPChill
 	Author URI: https://wpchill.com
 	License: GPL v2
@@ -24,7 +24,7 @@
  */
 class DLM_CORS {
 
-	const VERSION = '1.0.0';
+	const VERSION = '1.0.1';
 	/**
 	 * Access Origin
 	 *
@@ -113,9 +113,9 @@ class DLM_CORS {
 	public function requester_url_setting( $settings ) {
 		$settings['advanced']['sections']['access']['fields'][] = array(
 			'name'     => 'dlm_cors_requester_url',
-			'std'      => '',
-			'label'    => __( 'CORS Requester URL', 'dlm-cors' ),
-			'desc'     => __( 'Specify the requester URL so we can allow cross site download requests comming from the specified source. Add <code>*</code> in order to accept all. ', 'dlm-cors' ),
+			'std'      => '*',
+			'label'    => __( 'CORS URL', 'dlm-cors' ),
+			'desc'     => __( 'In the above input box, you should enter the URL of the website on which you wish to serve the downloads. According to our <a href="https://www.download-monitor.com/kb/network-failed-error-on-downloads/#cors-error" target="_blank">doc</a>, in the input box above, you\'d enter the URL for Website A. <code>*</code> accepts requests from all domains, thus not being 100% secure.', 'dlm-cors' ),
 			'type'     => 'text',
 			'priority' => 70
 		);

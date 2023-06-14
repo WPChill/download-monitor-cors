@@ -3,7 +3,7 @@ Contributors: wpchill, silkalns
 Tags: download manager, document management, file manager, digital store, ecommerce, document management plugin,  download monitor, download counter, password protection, download protection, password, protect downloads, tracker, sell, shop, ecommerce, paypal
 Requires at least: 5.4
 Tested up to: 6.1
-Stable tag: 1.0.0
+Stable tag: 1.0.1
 License: GPLv3
 Text Domain: -
 Requires PHP: 5.6
@@ -74,6 +74,10 @@ The manual installation method involves downloading the plugin and uploading it 
 * Activate the plugin from the Plugins menu within the WordPress admin.
 
 == Changelog ==
+
+= 1.0.1 - 09.01.2023 =
+Changed: Default setting ( [#3](https://github.com/WPChill/dlm-cors/issues/3) )
+Changed: Text update ( [#2](https://github.com/WPChill/dlm-cors/issues/2) )
 
 = 1.0.0 =
 * First release
