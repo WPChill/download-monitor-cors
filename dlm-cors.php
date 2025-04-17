@@ -97,7 +97,7 @@ class DLM_CORS {
 	public function dependency_notice() {
 		?>
 		<div class="error">
-			<p><?php esc_html_e( 'Download Monitor - Cors requires Download Monitor to be active in order to work.', 'dlm-cors' ); ?></p>
+			<p><?php esc_html_e( 'Download Monitor - Cors requires Download Monitor to be active in order to work.', 'download-monitor-cors' ); ?></p>
 		</div>
 		<?php
 	}
@@ -114,8 +114,8 @@ class DLM_CORS {
 		$settings['advanced']['sections']['access']['fields'][] = array(
 			'name'     => 'dlm_cors_requester_url',
 			'std'      => '*',
-			'label'    => __( 'CORS URL', 'dlm-cors' ),
-			'desc'     => __( 'In the above input box, you should enter the URL of the website on which you wish to serve the downloads. According to our <a href="https://www.download-monitor.com/kb/network-failed-error-on-downloads/#cors-error" target="_blank">doc</a>, in the input box above, you\'d enter the URL for Website A. <code>*</code> accepts requests from all domains, thus not being 100% secure.', 'dlm-cors' ),
+			'label'    => __( 'CORS URL', 'download-monitor-cors' ),
+			'desc'     => __( 'In the above input box, you should enter the URL of the website on which you wish to serve the downloads. According to our <a href="https://www.download-monitor.com/kb/network-failed-error-on-downloads/#cors-error" target="_blank">doc</a>, in the input box above, you\'d enter the URL for Website A. <code>*</code> accepts requests from all domains, thus not being 100% secure.', 'download-monitor-cors' ),
 			'type'     => 'text',
 			'priority' => 70
 		);

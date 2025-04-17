@@ -1,11 +1,11 @@
 === Download Monitor - CORS ===
 Contributors: wpchill, silkalns
-Tags: download manager, document management, file manager, digital store, ecommerce, document management plugin,  download monitor, download counter, password protection, download protection, password, protect downloads, tracker, sell, shop, ecommerce, paypal
+Tags: download manager, document management, file manager, digital store, document management plugin
 Requires at least: 5.4
-Tested up to: 6.7
+Tested up to: 6.8
 Stable tag: 1.0.1
-License: GPLv3
-Text Domain: -
+License: GPL v2
+Text Domain: download-monitor-cors
 Requires PHP: 5.6
 
 Download Monitor is a plugin for selling, uploading and managing downloads, tracking downloads and displaying links.
